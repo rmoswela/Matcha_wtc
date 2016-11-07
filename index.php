@@ -10,7 +10,13 @@
   <body>
     <header>
       <span><a style="color:rgba(255,23,68 ,.9)" href="index.php">Vicini</a></span> Love
-      <div id="logout"><h2>logout</h2></div>
+      <div id="header-pane">
+        <label for="search">search</label>
+        <h2><a href="logout.php">logout</a></h2>
+        <form id="search" method="post" action="">
+          <input type="text" name="name" value="">
+        </form>
+      </div>
     </header>
     <h1 style="font-size: 3.9em; color: #53CADF; text-align: center">Home</h1>
   </body>
