@@ -1,3 +1,14 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>vicinilove</title>
+    <link rel="stylesheet" type="text/css" href="css/error.css" media="screen">
+  </head>
+  <body>
+
+  </body>
+</html>
 <?php
 session_start();
 require_once "db_object.php";
@@ -14,21 +25,21 @@ if (isset($_POST['submit']))
   if ($passw != $cpass)
   {
     $start->__setReport("password dont match". PHP_EOL);
-    print $start->__getReport();
+    print "<div id='error' onclick='disappear()'>".$start->__getReport()."</div>";
     header("refresh : 3; register.php");
     return;
   }
   if (filter_var($email, FILTER_VALIDATE_EMAIL) === false)
   {
     $start->__setReport("email is not valid");
-    print $start->__getReport();
+    print "<div id='error' onclick='disappear()'>".$start->__getReport()."</div>";
     header("refresh : 3; register.php");
     return;
   }
   if (strlen($passw) < 6)
   {
     $start->__setReport("password must be a minimum of 6 characters");
-    print $start->__getReport();
+    print "<div id='error' onclick='disappear()'>".$start->__getReport()."</div>";
     header("refresh : 3; register.php");
     return;
   }
@@ -45,7 +56,7 @@ if (isset($_POST['submit']))
       if($sql->rowCount() > 0)
       {
         $start->__setReport("ERROR: either an email or username already exists in database");
-        print $start->__getReport();
+        print "<div id='error' onclick='disappear()'>".$start->__getReport()."</div>";
         header("refresh: 3; register.php");
         return;
       }
@@ -62,7 +73,7 @@ if (isset($_POST['submit']))
     }
     catch(PDOException $error) {
       $start->__setReport($error->getMessage());
-      print $start->__getReport();
+      print "<div id='error' onclick='disappear()'>".$start->__getReport()."</div>";
       return;
     }
     $conn = null;

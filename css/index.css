@@ -1,0 +1,80 @@
+@import url('https://fonts.googleapis.com/css?family=Lobster');
+body, html {
+  margin: 0;
+  padding: 0;
+}
+
+
+body {
+  margin: 0;
+  padding: 0;
+  background-repeat     : no-repeat;
+  background-size       : cover;
+  background-attachment : fixed;
+  font: 1em Helvetica;
+}
+
+
+#bottom-links {
+  margin-top: 0.5%;
+  display: inline-block;
+}
+
+header > div > h2 {
+  float: right;
+  padding: 0;
+  margin: 0;
+  font-size: .9em;
+}
+
+header span {
+  font-family: 'Lobster', cursive;
+}
+
+h1 {
+  color: rgba(0,0,0,.7);
+  font-weight: 900;
+  font-size: 2.7em;
+}
+a {
+  cursor: pointer;
+  text-decoration: none;
+}
+span {
+  font-size: .75em;
+  background-color: white;
+  padding: 2px 5px;
+  color: rgba(0,0,0,.6);
+  border-radius: 2px;
+  box-shadow: 1px 1px 1px rgba(0,0,0,.3);
+  margin: 5px;
+}
+span:hover {
+  color: #53CACE;
+}
+p:nth-of-type(2) {
+  font-size: 1em;
+}
+
+footer a {
+  cursor: pointer;
+  color: #53CACE;
+  text-decoration: none;
+}
+footer p {
+  color: white;
+  font-size: .9em;
+}
+footer {
+  font-weight: lighter;
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  color: white;
+  padding: 1%;
+  text-align: center;
+  clear: both;
+  height: 5%;
+  background-color: black;
+}

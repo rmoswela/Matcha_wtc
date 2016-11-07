@@ -5,6 +5,7 @@
     <title>vicinilove</title>
     <link rel="stylesheet" type="text/css" href="css/header.css">
     <link rel="stylesheet" type="text/css" href="css/login.css">
+    <link rel="stylesheet" type="text/css" href="css/error.css">
   </head>
   <body background="./images/love-sand.jpg">
     <header>
@@ -55,7 +56,7 @@ if(isset($_POST['submit']))
     if (count($res) > 1 && (password_verify($passw, $res['password']) == true) && $res['active'] == 0)
     {
       $start->__setReport("account not activated, please check your email and activate this account");
-      print "<div id='error' onclick='disapper()'>".$start->__getReport()."</div>";
+      print "<div id='error' onclick='disappear()'>".$start->__getReport()."</div>";
       return;
 		}
     if(count($res) > 1 && $res['active'] == 1)
@@ -63,7 +64,7 @@ if(isset($_POST['submit']))
       if (!password_verify($passw, $res['password']))
       {
         $start->__setReport("incorrect password");
-        print "<div id='error' onclick='disapper()'>".$start->__getReport()."</div>";
+        print "<div id='error' onclick='disappear()'>".$start->__getReport()."</div>";
         return;
       }
       $uname = $res['username'];
@@ -72,19 +73,19 @@ if(isset($_POST['submit']))
 		}
     elseif (count($res) > 1 && (password_verify($passw, $res['password']) == false)) {
         $start->__setReport("incorrect password");
-        print "<div id='error' onclick='disapper()'>".$start->__getReport()."</div>";
+        print "<div id='error' onclick='disappear()'>".$start->__getReport()."</div>";
         return;
     }
     else
     {
       $start->__setReport("incorrect username");
-      print "<div id='error' onclick='disapper()'>".$start->__getReport()."</div>";
-      return; 
+      print "<div id='error' onclick='disappear()'>".$start->__getReport()."</div>";
+      return;
 		}
 	}
 	catch (PDOException $err) {
 		$start->__setReport($sql ."". $err->getMessage());
-    print "<div id='error' onclick='disapper()'>".$start->__getReport()."</div>";
+    print "<div id='error' onclick='disappear()'>".$start->__getReport()."</div>";
 	}
 }
 $conn = null;

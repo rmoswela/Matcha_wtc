@@ -2,6 +2,7 @@
 <html>
   <head>
     <link rel="stylesheet" type="text/css" href="css/header.css">
+    <link rel="stylesheet" type="text/css" href="css/error.css" media="screen">
     <link rel="stylesheet" type="text/css" href="css/reg.css">
   </head>
   <body background="./images/valentine-girl.jpg">
