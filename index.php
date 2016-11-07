@@ -9,6 +9,7 @@
   <body>
     <header>
       <span><a style="color:rgba(255,23,68 ,.9)" href="index.php">Vicini</a></span> Love
+      <div id="logout"><img src="images/log-off.png" width="80" height="80" alt="" /></div>
     </header>
     <h1 style="font-size: 3.9em; color: #53CADF; text-align: center">Home</h1>
   </body>
