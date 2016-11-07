@@ -1,0 +1,155 @@
+@import url('https://fonts.googleapis.com/css?family=Lobster');
+body {
+  margin: 0;
+  padding: 0;
+  background-repeat     : no-repeat;
+  background-size       : cover;
+  background-attachment : fixed;
+  font: 1em Helvetica;
+}
+#container {
+  width: 840px;
+  height: 100%;
+  margin: 25px auto;
+}
+#form-title {
+  opacity: 1;
+  border-radius: 2px 8px 10px;
+  border-top: 1px solid rgba(0,0,0,.2);
+  border-bottom: 1px solid rgba(0,0,0,.2);
+}
+#form-title:hover {
+  border-top: 1px solid rgba(83, 218, 206, .2);
+  border-bottom: 1px solid rgba(83, 218, 206, .2);
+}
+
+#bottom-links {
+  margin-top: 1%;
+}
+.app-title{
+  float: left;
+  background-color: transparent;
+  padding-top: 0;
+  margin-left: 20px;
+  padding-right: 20px;
+}
+
+.signup {
+  float: left;
+  width: 50%;
+  opacity: .9;
+  transition: opacity 7s;
+  -moz-transition: opacity 7s;
+  -webkit-transition: opacity 7s;
+  margin-top: 3.9%;
+  padding: 30px 20px;
+  background-color: white;
+  text-align: center;
+  border-radius: 5px 0 0 5px;
+}
+
+[type=text] {
+  display: block;
+  margin: 0 auto;
+  width: 80%;
+  border: 0;
+  border-bottom: 1px solid rgba(0,0,0,.2);
+  height: 45px;
+  line-height: 45px;
+  margin-bottom: 10px;
+  font-size: 1em;
+  color: rgba(0,0,0,.4);
+}
+[type=password] {
+  display: block;
+  margin: 0 auto;
+  width: 80%;
+  border: 0;
+  border-bottom: 1px solid rgba(0,0,0,.2);
+  height: 45px;
+  line-height: 45px;
+  margin-bottom: 10px;
+  font-size: 1em;
+  color: rgba(0,0,0,.4);
+}
+[type=submit]:hover {
+  cursor: pointer;
+  background-color: #53CADF;
+}
+[type=submit] {
+  margin-top: 25px;
+  width: 80%;
+  border: 0;
+  background-color: #53CACE;
+  border-radius: 5px;
+  height: 50px;
+  color: white;
+  font-weight: 400;
+  font-size: 1em;
+}
+[type=password]:focus {
+  outline: none;
+  border-color: #53CACE;
+}
+[type='text']:focus {
+  outline: none;
+  border-color: #53CACE;
+}
+
+header span {
+  font-family: 'Lobster', cursive;
+}
+h1 span {
+  font-family: 'Lobster', cursive;
+}
+h1 {
+  color: rgba(0,0,0,.7);
+  font-weight: 900;
+  font-size: 2.7em;
+}
+p {
+  color: rgba(0,0,0,.6);
+  font-size: 1.2em;
+  margin: 50px 0 50px 0;
+}
+a {
+  cursor: pointer;
+  text-decoration: none;
+}
+footer a {
+  cursor: pointer;
+  color: #53CACE;
+  text-decoration: none;
+}
+span {
+  font-size: .75em;
+  background-color: white;
+  padding: 2px 5px;
+  color: rgba(0,0,0,.6);
+  border-radius: 2px;
+  box-shadow: 1px 1px 1px rgba(0,0,0,.3);
+  margin: 5px;
+}
+span:hover {
+  color: #53CACE;
+}
+
+
+footer p {
+  color: white;
+  font-size: .9em;
+  padding: 0;
+}
+
+footer {
+  font-weight: lighter;
+  position: absolute;
+  width: 100%;
+  height: 10%;
+  color: white;
+  padding: 1%;
+  position: fixed;
+  bottom: 0;
+  text-align: center;
+  background-color: black;
+}
