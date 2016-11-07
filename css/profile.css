@@ -1,0 +1,295 @@
+@import url('https://fonts.googleapis.com/css?family=Lobster');
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+@import url('https://fonts.googleapis.com/css?family=Lato');
+body, html {
+
+  margin: 0;
+  padding: 0;
+}
+a {
+  cursor: pointer;
+  text-decoration: none;
+}
+footer a {
+  cursor: pointer;
+  color: #53CACE;
+  text-decoration: none;
+}
+span {
+  font-size: .75em;
+  background-color: white;
+  padding: 2px 5px;
+  color: rgba(0,0,0,.6);
+  border-radius: 2px;
+  box-shadow: 1px 1px 1px rgba(0,0,0,.3);
+  margin: 5px;
+}
+
+h1 {
+  color: rgba(0,0,0,.7);
+  font-weight: 900;
+  font-size: 2.7em;
+}
+span:hover {
+  color: #53CACE;
+}
+header span {
+  font-family: 'Lobster', cursive;
+}
+ul {
+  -webkit-margin-after: 0em;
+  -webkit-margin-before: 0em;
+  padding: .9%;
+  list-style: none;
+}
+
+.side-content {
+  float: left;
+  width: 15%;
+  height: 100%;
+  margin-top: 20px;
+}
+.side-content > ul > li {
+  font-weight: normal;
+  font-family: 'Roboto', sans-serif;
+  border-top: 1px solid rgba(0, 0, 0, 0.2);
+}
+.side-content > ul > li a {
+  color: #53CACE;
+  line-height: 40px;
+  display: block;
+}
+
+.side-content > ul > li a:hover {
+  color: white;
+  background-color: #53CADF;
+}
+
+.side-content > ul > li a {
+  padding-left: 10%;
+}
+
+.edit-options {
+  width: 85%;
+  height: 100%;
+  margin-top: 20px;
+  margin-left: 40px;
+}
+
+#orientation-form > [type=submit]{
+  width: 25%;
+}
+
+#orientation {
+  display: inline-block;
+}
+
+#interests {
+  display: none;
+  float: left;
+  width: 40%;
+  text-align: center;
+  margin-left: 17%;
+  padding: 30px 20px;
+  background-color: white;
+  text-align: center;
+  border-radius: 5px 0 0 5px;
+}
+  #biography {
+  display: none;
+  float: left;
+  width: 40%;
+  text-align: center;
+  margin-left: 17%;
+  padding: 30px 20px;
+  background-color: white;
+  text-align: center;
+  border-radius: 5px 0 0 5px;
+}
+#sexual {
+  display: none;
+  margin-left: 200px;
+  float: left;
+  width: 40%;
+  margin-left: 17%;
+  padding: 30px 20px;
+  background-color: white;
+  text-align: center;
+  border-radius: 5px 0 0 5px;
+}
+#wrapper {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+#user-pic img {
+  border-radius: 25px;
+}
+
+#user {
+  width: 10%;
+  float: right;
+  display: inline-block;
+}
+#user-pic {
+  margin: 0;
+  float: left;
+}
+
+#user-name {
+  margin: 0;
+  color: rgba(0,0,0, .7);
+  margin-right: 10%;
+  margin-top: 4%;
+  float: left;
+  font-size: .7em;
+}
+
+#heading > h1 {
+  font-family: 'Roboto', sans-serif;
+}
+
+[type=text] {
+  display: block;
+  margin: 0 auto;
+  width: 80%;
+  border: 0;
+  border-bottom: 1px solid rgba(0,0,0,.2);
+  height: 45px;
+  line-height: 45px;
+  margin-bottom: 10px;
+  font-size: 1em;
+  color: rgba(0,0,0,.4);
+}
+
+textarea {
+  display: block;
+  margin: 0 auto;
+  font-size: 1em;
+  min-width: 80%;
+  min-height: 80%;
+  max-width: 100%;
+  max-height: 100%;
+  border: 0;
+  border-bottom: 1px solid rgba(0,0,0,.2);
+  height: 45px;
+  line-height: 45px;
+  margin-bottom: 10px;
+  font-size: 1em;
+  color: rgba(0,0,0,.4);
+}
+
+textarea:focus {
+  outline: none;
+}
+
+[type=password] {
+  display: block;
+  margin: 0 auto;
+  width: 80%;
+  border: 0;
+  height: 45px;
+  line-height: 45px;
+  margin-bottom: 10px;
+  font-size: 1em;
+  color: rgba(0,0,0,.4);
+  border-bottom: 1px solid rgba(0,0,0,.2);
+}
+[type=submit]:hover {
+  cursor: pointer;
+  background-color: #53CADF;
+}
+[type=submit] {
+  margin-top: 25px;
+  width: 20%;
+  border: 0;
+  background-color: #53CACE;
+  border-radius: 5px;
+  height: 50px;
+  color: white;
+  font-weight: 400;
+  font-size: 1em;
+}
+[type=password]:focus {
+  outline: none;
+  border-color: #53CACE;
+}
+[type='text']:focus {
+  outline: none;
+  border-color: #53CACE;
+}
+header span {
+  font-family: 'Lobster', cursive;
+}
+h1 span {
+  font-family: 'Lobster', cursive;
+}
+h1 {
+  color: rgba(0,0,0,.7);
+  font-weight: 900;
+  font-size: 2.7em;
+}
+p {
+  color: rgba(0,0,0,.6);
+  font-size: 1.2em;
+  margin: 50px 0 50px 0;
+}
+
+a {
+  cursor: pointer;
+  text-decoration: none;
+}
+
+footer a {
+  font-family: 'Ubuntu', sans-serif;
+  cursor: pointer;
+  color: rgba(0, 155, 155, .5);
+  text-decoration: none;
+}
+span {
+  font-size: .75em;
+  background-color: white;
+  padding: 2px 5px;
+  border-radius: 2px;
+  box-shadow: 1px 1px 1px rgba(0,0,0,.3);
+  color: rgba(255,255,255,.6);
+  margin: 5px;
+}
+span:hover {
+  color: #53CACE;
+}
+p:nth-of-type(2) {
+  font-size: 1em;
+}
+
+label {
+  color: rgba(0, 0, 0, 0.5);
+  font-size: 1.61803em;
+  font-family: 'Robot', sans-serif;
+  font-weight: lighter;
+}
+
+footer p {
+  margin: 2%;
+  color: rgba(0, 0, 0, 0.5);
+  font-size: .9em;
+}
+
+footer > span {
+  background-color: rgba(255,255,255,.6);
+}
+
+footer {
+  font-weight: lighter;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 1%;
+  text-align: center;
+  clear: both;
+  background-color: rgba(0, 0, 0, 0.1);;
+}
