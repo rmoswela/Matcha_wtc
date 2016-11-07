@@ -1,0 +1,147 @@
+@import url('https://fonts.googleapis.com/css?family=Lobster');
+body {
+  margin: 0;
+  padding: 0;
+  background-repeat     : no-repeat;
+  background-size       : cover;
+  background-attachment : fixed;
+  font: 1em Helvetica;
+}
+#container {
+  width: 45%;
+  height: 100%;
+  margin: 0 auto;
+}
+#form-title {
+  opacity: 0.1;
+  transition: opacity 4s;
+  -webkit-transition: opacity 4s;
+  border-radius: 2px 8px 10px;
+  border-top: 1px solid rgba(0,0,0,.2);
+  border-bottom: 1px solid rgba(0,0,0,.2);
+}
+#form-title:hover {
+  border-top: 1px solid rgba(83, 218, 206, .2);
+  border-bottom: 1px solid rgba(83, 218, 206, .2);
+}
+
+#bottom-links {
+  margin-top: 0.5%;
+  display: inline-block;
+}
+
+.signup {
+  width: 50%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 3.9%;
+  padding: 30px 20px;
+  background-color: rgba(255, 255, 255, 0);
+  transition: background-color 2s;
+  -webkit-transition: background-color 2s;
+  text-align: center;
+  border-radius: 5px 0 0 5px;
+}
+.signup:hover {
+  background-color: rgba(255, 255, 255, 1);
+}
+[type=text] {
+  display: block;
+  margin: 0 auto;
+  width: 80%;
+  border: 0;
+  background-color: rgba(255, 255, 255, 0.4);
+  border-bottom: 1px solid rgba(0,0,0,.2);
+  height: 45px;
+  line-height: 45px;
+  margin-bottom: 10px;
+  font-size: 1em;
+  color: rgba(0,0,0,.4);
+}
+[type=password] {
+  display: block;
+  margin: 0 auto;
+  width: 80%;
+  border: 0;
+  background-color: rgba(255, 255, 255, 0.4);
+  border-bottom: 1px solid rgba(0,0,0,.2);
+  height: 45px;
+  line-height: 45px;
+  margin-bottom: 10px;
+  font-size: 1em;
+  color: rgba(0,0,0,.4);
+}
+[type=submit]:hover {
+  cursor: pointer;
+  background-color: #53CADF;
+}
+[type=submit] {
+  margin-top: 25px;
+  width: 80%;
+  border: 0;
+  background-color: #53CACE;
+  border-radius: 5px;
+  height: 50px;
+  color: white;
+  font-weight: 400;
+  font-size: 1em;
+}
+[type=password]:focus {
+  outline: none;
+  border-color: #53CACE;
+}
+[type='text']:focus {
+  outline: none;
+  border-color: #53CACE;
+}
+header span {
+  font-family: 'Lobster', cursive;
+}
+
+h1 {
+  color: rgba(0,0,0,.7);
+  font-weight: 900;
+  font-size: 2.7em;
+}
+a {
+  cursor: pointer;
+  text-decoration: none;
+}
+span {
+  font-size: .75em;
+  background-color: white;
+  padding: 2px 5px;
+  color: rgba(0,0,0,.6);
+  border-radius: 2px;
+  box-shadow: 1px 1px 1px rgba(0,0,0,.3);
+  margin: 5px;
+}
+span:hover {
+  color: #53CACE;
+}
+p:nth-of-type(2) {
+  font-size: 1em;
+}
+
+footer a {
+  cursor: pointer;
+  color: #53CACE;
+  text-decoration: none;
+}
+footer p {
+  color: white;
+  font-size: .9em;
+}
+footer {
+  font-weight: lighter;
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  color: white;
+  padding: 1%;
+  text-align: center;
+  clear: both;
+  height: 5%;
+  background-color: black;
+}

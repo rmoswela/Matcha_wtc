@@ -3,4 +3,8 @@
 *.swp
 *.swo
 composer*
+<<<<<<< HEAD
 vendor
+=======
+vendor
+>>>>>>> 9a0c3ed1bd3d04dbc0a4fd03ae10c4042fc9a95f
