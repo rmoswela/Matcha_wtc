@@ -1,0 +1,6 @@
+.DS*
+._*
+*.swp
+*.swo
+composer*
+vendor
