@@ -46,6 +46,7 @@ body {
   background-color: white;
   text-align: center;
   border-radius: 5px 0 0 5px;
+  position: relative;
 }
 
 [type=text] {

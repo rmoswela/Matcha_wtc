@@ -13,15 +13,16 @@
       <div id="header-pane">
         <label for="search">search</label>
         <h2><a href="logout.php">logout</a></h2>
-        <form id="search" method="post" action="">
-          <input type="text" name="name" value="">
-        </form>
+        <h2><a href="profile.php">profile</a></h2>
       </div>
     </header>
-    <h1 style="font-size: 3.9em; color: #53CADF; text-align: center">Home</h1>
+    <div class="main-content">
+      <div id="res">
+      </div>
+      <div id="suggestions"></div>
+      <div id="right-content"></div>
+    </div>
+    <script type="text/javascript" src="javascript/ajax.js">
+    </script>
   </body>
 </html>
-
-<?php
-
-?>

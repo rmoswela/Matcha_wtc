@@ -4,7 +4,6 @@ body, html {
   padding: 0;
 }
 
-
 body {
   margin: 0;
   padding: 0;
@@ -12,20 +11,6 @@ body {
   background-size       : cover;
   background-attachment : fixed;
   font: 1em Helvetica;
-}
-
-#bottom-links {
-  margin-top: 0.5%;
-  display: inline-block;
-}
-
-#header-pane {
-  margin: 0;
-  color: rgba(0,0,0, .7);
-  margin-right: .9%;
-  margin-top: .3%;
-  float: right;
-  font-size: .7em;
 }
 
 a {
@@ -43,7 +28,7 @@ header > div > h2 {
   float: right;
   padding: 0;
   margin: 0;
-  padding: 0 2%; 
+  padding: 0 2%;
   font-size: .9em;
 }
 
@@ -69,6 +54,8 @@ span {
   box-shadow: 1px 1px 1px rgba(0,0,0,.3);
   margin: 5px;
 }
+
+
 span:hover {
   color: #53CACE;
 }
@@ -97,4 +84,48 @@ footer {
   clear: both;
   height: 5%;
   background-color: black;
+}
+
+header {
+  height: 90%;
+}
+
+#main-content {
+  display: inline-block;
+}
+
+#res {
+  width: 30%;
+  height: 300px;
+  float: left;
+  background-color: #000;
+}
+
+#right-content {
+  width: 30%;
+  height: 300px;
+  float: left;
+  margin: 0 auto;
+  background-color: #555;
+}
+
+#suggestions {
+  width: 30%;
+  height: 300px;
+  float: left;
+  background-color: #eee;
+}
+
+#bottom-links {
+  margin-top: 0.5%;
+  display: inline-block;
+}
+
+#header-pane {
+  margin: 0;
+  color: rgba(0,0,0, .7);
+  margin-right: .9%;
+  margin-top: .3%;
+  float: right;
+  font-size: .7em;
 }

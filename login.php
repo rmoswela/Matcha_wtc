@@ -15,7 +15,7 @@
 
       <div id="show" class='signup'>
           <h1 id="form-title">login</h1>
-         <form name="user_login" onsubmit="return formValidate()" action="" method="post">
+         <form name="user_login" action="" method="post">
            <input type='text' name="uname" placeholder='username:'/>
            <input type='password' required name="passwd" placeholder='Password:'/>
            <input type='submit' name="submit" value="login" placeholder='login'/>
