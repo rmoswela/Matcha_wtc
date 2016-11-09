@@ -7,7 +7,7 @@
     <link rel="stylesheet" type="text/css" href="css/login.css">
     <link rel="stylesheet" type="text/css" href="css/error.css">
   </head>
-  <body background="./imageslove-sand.jpg">
+  <body background="./images/love-sand.jpg">
     <header>
       <span><a style="color:rgba(255,23,68 ,.9)" href="index.php">Vicini</a></span> Love
     </header>
