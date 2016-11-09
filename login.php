@@ -7,7 +7,7 @@
     <link rel="stylesheet" type="text/css" href="css/login.css">
     <link rel="stylesheet" type="text/css" href="css/error.css">
   </head>
-  <body background="./images/love-sand.jpg">
+  <body background="./imageslove-sand.jpg">
     <header>
       <span><a style="color:rgba(255,23,68 ,.9)" href="index.php">Vicini</a></span> Love
     </header>
@@ -48,8 +48,7 @@ if(isset($_POST['submit']))
     $uname = htmlspecialchars(trim($_POST['uname']));
     $passw = htmlspecialchars(trim($_POST['passwd']));
     $conn = $start->server_connect();
-    $sql = $conn->prepare("SELECT active, username, password, email FROM users
-                           WHERE username = :uname");
+    $sql = $conn->prepare("SELECT * FROM users WHERE username = :uname");
     $sql->bindParam(":uname", $uname);
     $sql->execute();
     $res = $sql->fetch();
@@ -67,8 +66,12 @@ if(isset($_POST['submit']))
         print "<div id='error' onclick='disappear()'>".$start->__getReport()."</div>";
         return;
       }
-      $uname = $res['username'];
-			$_SESSION['username'] = $uname;
+			$_SESSION['username'] = $res['username'];
+      $_SESSION['firstname'] = $res['firstname'];
+      $_SESSION['lastname'] = $res['lastname'];
+      $_SESSION['email'] = $res['email'];
+      $_SESSION['gender'] = $res['gender'];
+      $_SESSION['user_id'] = $res['user_id'];
 			header("Location: index.php");
 		}
     elseif (count($res) > 1 && (password_verify($passw, $res['password']) == false)) {
