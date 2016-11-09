@@ -15,7 +15,28 @@ if (isset($_SESSION['username']))
     if (count($res) > 1 && $res['gender'] == "male")
     {
       $sql_suggestions = $conn->query("SELECT * FROM users WHERE gender = 'female'");
-      $suggest_list = $sql_suggestions->fetch();
+      $suggest_list = $sql_suggestions->fetchAll();
+      $response = json_encode($suggest_list);
+      print $response;
+    }
+    if (count($res) > 1 && $res['gender'] == "female")
+    {
+      $sql_suggestions = $conn->query("SELECT * FROM users WHERE gender = 'male'");
+      $suggest_list = $sql_suggestions->fetchAll();
+      $response = json_encode($suggest_list);
+      print $response;
+    }
+    if (count($res) > 1 && $res['gender'] == "bisexual")
+    {
+      $sql_suggestions = $conn->query("SELECT * FROM users WHERE username != '".$uname."'");
+      $suggest_list = $sql_suggestions->fetchAll();
+      $response = json_encode($suggest_list);
+      print $response;
+    }
+    if (count($res) > 1 && $res['gender'] == "female")
+    {
+      $sql_suggestions = $conn->query("SELECT * FROM users WHERE gender = 'transgender' AND username != '".$uname."'");
+      $suggest_list = $sql_suggestions->fetchAll();
       $response = json_encode($suggest_list);
       print $response;
     }
