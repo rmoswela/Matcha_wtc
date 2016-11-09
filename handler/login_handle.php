@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once "db_object.php";
+require_once "../db_object.php";
 
 if (!empty($_SESSION['username'])) {
 	header("Location: index.php");
@@ -9,38 +9,50 @@ if(isset($_POST['submit']))
 {
   try
 	{
-    $email = $_POST['email'];
-    $passw = $_POST['passwd'];//hash('whirlpool', $_POST['passwd']);
-    if (filter_var($email, FILTER_VALIDATE_EMAIL) === false)
-    {
-      $start->__setReport("email is not valid");
-      print $start->__getReport();
-      header("refresh : 3; login.php");
-      return;
-    }
+    $uname = htmlspecialchars(trim($_POST['uname']));
+    $passw = htmlspecialchars(trim($_POST['passwd']));
     $conn = $start->server_connect();
-    $sql = $conn->prepare("SELECT active, username, password, email FROM users
-					 WHERE email = :email AND password = :passwd");
-		$sql->bindParam(":email", $email);
-		$sql->bindParam(":passwd", $passw);
+    $sql = $conn->prepare("SELECT * FROM users WHERE username = :uname");
+    $sql->bindParam(":uname", $uname);
     $sql->execute();
-		$res = $sql->fetch();
-		if ($sql->rowCount() > 0 && $res['active'] == 0)
-		{
-			header("Location: notverified.php");
+    $res = $sql->fetch();
+    if (count($res) > 1 && (password_verify($passw, $res['password']) == true) && $res['active'] == 0)
+    {
+      $start->__setReport("account not activated, please check your email and activate this account");
+      print "<div id='error' onclick='disappear()'>".$start->__getReport()."</div>";
+      return;
 		}
-    if($sql->rowCount() > 0 && $res['active'] == 1) {
-			$_SESSION['username'] = $uname;
-			header("Location: index.php");
+    if(count($res) > 1 && $res['active'] == 1)
+    {
+      if (!password_verify($passw, $res['password']))
+      {
+        $start->__setReport("incorrect password");
+        print "<div id='error' onclick='disappear()'>".$start->__getReport()."</div>";
+        return;
+      }
+			$_SESSION['username'] = $res['username'];
+      $_SESSION['firstname'] = $res['firstname'];
+      $_SESSION['lastname'] = $res['lastname'];
+      $_SESSION['email'] = $res['email'];
+      $_SESSION['gender'] = $res['gender'];
+      $_SESSION['user_id'] = $res['user_id'];
+			header("Location: ../index.php");
 		}
-		else {
-			$start->__setReport("<strong>unknown user</strong>". PHP_EOL);
-      print $start->__getReport();
+    elseif (count($res) > 1 && (password_verify($passw, $res['password']) == false)) {
+        $start->__setReport("incorrect password");
+        print "<div id='error' onclick='disappear()'>".$start->__getReport()."</div>";
+        return;
+    }
+    else
+    {
+      $start->__setReport("incorrect username");
+      print "<div id='error' onclick='disappear()'>".$start->__getReport()."</div>";
+      return;
 		}
 	}
 	catch (PDOException $err) {
 		$start->__setReport($sql ."". $err->getMessage());
-    print $start->__getReport();
+    print "<div id='error' onclick='disappear()'>".$start->__getReport()."</div>";
 	}
 }
 $conn = null;
