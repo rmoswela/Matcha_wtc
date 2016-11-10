@@ -13,17 +13,6 @@ body {
   font: 1em Helvetica;
 }
 
-a {
-  text-decoration: none;
-}
-
-header > div > form {
-  float: right;
-  padding: 0;
-  margin: 0;
-  padding: 0 0;
-}
-
 header > div > h2 {
   float: right;
   padding: 0;
@@ -122,10 +111,11 @@ header {
 }
 
 #header-pane {
-  margin: 0;
-  color: rgba(0,0,0, .7);
-  margin-right: .9%;
-  margin-top: .3%;
   float: right;
+  margin: 0;
   font-size: .7em;
+  margin-top: .3%;
+  display: inline-block;
+  margin-right: .9%;
+  color: rgba(0,0,0, .7);
 }
