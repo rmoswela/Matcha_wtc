@@ -43,6 +43,7 @@ class Matcha
       $response = json_encode($suggest_list);
       return ($response);
     }
+    $this->connection = null;
   }
 
   public function best_match()
