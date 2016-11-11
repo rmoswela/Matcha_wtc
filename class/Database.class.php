@@ -92,9 +92,30 @@ class Database
           `interests` VARCHAR(255),
           `sex-preference` VARCHAR(80),
           `biography` TEXT)";
+
+
+    $profile_sql  = "CREATE TABLE IF NOT EXISTS users(
+	        `user_id`	 INT(8) PRIMARY KEY AUTO_INCREMENT NOT NULL,
+          `gender` VARCHAR(25),
+          `interests` VARCHAR(255),
+          `sex-preference` VARCHAR(80),
+          `biography` TEXT)";
+
     try
     {
       if ($conn->query($sql))
+      {
+        $this->report = "Users table created successfully<br>";
+        print $this->__getReport();
+      }
+      else
+      {
+        $this->report = "couldn't create table<br>";
+        print $this->__getReport();
+      }
+
+      //Create table for profile
+      if ($conn->query($profile_sql))
       {
         $this->report = "Users table created successfully<br>";
         print $this->__getReport();
