@@ -14,11 +14,6 @@ class Database
     $this->DB_PASSWORD = $DB_PASSWORD;
   }
 
-  function whoami()
-  {
-    print "Database class<br>";
-  }
-
   function __setReport($message)
   {
     $this->report = $message;
@@ -67,19 +62,6 @@ class Database
 
   function create_schema($pdo)
   {
-    /*
-    $sql  = "CREATE DATABASE IF NOT EXISTS db_vicinity;USE db_vicinity;";
-    if ($conn->query($sql))
-    {
-      $this->report = "Database created successfully<br>";
-      print $this->__getReport();
-    }
-    else
-    {
-      $this->report = "couldn't create DATABASE<br>";
-      print $this->__getReport();
-      return;
-    }*/
     $pdo->query("CREATE DATABASE IF NOT EXISTS db_vicinity;")
     or die(print_r($pdo->errorInfo(), true));
 
@@ -92,7 +74,7 @@ class Database
              lastname VARCHAR (60) NOT NULL,
              email VARCHAR (60) NOT NULL UNIQUE ,
              username VARCHAR (60) NOT NULL,
-             passwd VARCHAR (255) NOT NULL,
+             password VARCHAR (255) NOT NULL,
              active INT (1) NOT NULL  DEFAULT 0,
              code VARCHAR(255) NOT NULL,
              online INT NOT NULL DEFAULT 0,
@@ -102,16 +84,14 @@ class Database
     )
     or die(print_r($pdo->errorInfo(), true));
     try {
-    $pdo->query("
-               CREATE TABLE IF NOT EXISTS photos(
+    $pdo->query("CREATE TABLE IF NOT EXISTS photos(
                 id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
                 user_id INT NOT NULL,
                 upload_date DATETIME DEFAULT CURRENT_TIMESTAMP,
                 url TEXT NOT NULL
                );")or die(print_r($pdo->errorInfo(), true));
 
-    $pdo->query("
-               CREATE TABLE IF NOT EXISTS profile(
+    $pdo->query("CREATE TABLE IF NOT EXISTS profile(
                 id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
                 user_id INT NOT NULL,
                 profile_picture TEXT NOT NULL,
@@ -128,16 +108,14 @@ class Database
                 location TEXT
                );")or die(print_r($pdo->errorInfo(), true));
 
-    $pdo->query("
-               CREATE TABLE IF NOT EXISTS likes(
+    $pdo->query("CREATE TABLE IF NOT EXISTS likes(
                 id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
                 likes_id INT NOT NULL,
                 liked_id INT NOT NULL,
                 liked_date DATETIME DEFAULT CURRENT_TIMESTAMP
                );")or die(print_r($pdo->errorInfo(), true));
 
-    $pdo->query("
-              CREATE TABLE IF NOT EXISTS views(
+    $pdo->query("CREATE TABLE IF NOT EXISTS views(
                id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
                username VARCHAR(200),
                profile_id INT NOT NULL,
@@ -145,8 +123,8 @@ class Database
                notified VARCHAR(10) NOT NULL
               );")or die(print_r($pdo->errorInfo(), true));
 
-    $pdo->query("
-              CREATE TABLE IF NOT EXISTS notifications(id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
+    $pdo->query("CREATE TABLE IF NOT EXISTS notifications(
+              id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
               `type` VARCHAR(100) NOT NULL,
               `from` INT NOT NULL,
               `to` INT NOT NULL,
@@ -154,8 +132,7 @@ class Database
               notification_date DATETIME DEFAULT CURRENT_TIMESTAMP
               );")or die(print_r($pdo->errorInfo(), true));
 
-    $pdo->query("
-              CREATE TABLE IF NOT EXISTS messages(
+    $pdo->query("CREATE TABLE IF NOT EXISTS messages(
                id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
                to_id INT NOT NULL,
                from_id INT NOT NULL,
@@ -163,8 +140,7 @@ class Database
                message_date DATETIME DEFAULT CURRENT_TIMESTAMP
               );")or die(print_r($pdo->errorInfo(), true));
 
-    $pdo->query("
-              CREATE TABLE IF NOT EXISTS blocking(
+    $pdo->query("CREATE TABLE IF NOT EXISTS blocking(
                id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
                user_id INT NOT NULL,
                blocked INT NOT NULL,

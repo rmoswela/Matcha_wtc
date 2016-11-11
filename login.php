@@ -73,7 +73,7 @@ if(isset($_POST['submit']))
       $_SESSION['lastname'] = $res['lastname'];
       $_SESSION['email'] = $res['email'];
       $_SESSION['gender'] = $res['gender'];
-      $_SESSION['user_id'] = $res['user_id'];
+      $_SESSION['user_id'] = $res['id'];
 			header("Location: index.php");
 		}
     elseif (count($res) > 1 && (password_verify($passw, $res['password']) == false)) {

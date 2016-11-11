@@ -3,7 +3,7 @@ $(document).ready(function()
 	var pages = ["photos","update","likes","fame"];
 	var initProfile = [];
 
-	$.get("handler/profile_handler.php?action=userProfile", function(data)
+	$.get("php/profile.php?action=userProfile", function(data)
 	{
 		//initProfile = JSON.parse(data);
 		console.log(data);
@@ -30,14 +30,14 @@ $(document).ready(function()
 
 
 	/*************************** GET DATA FOR THE PAGE **************************/
-	$.get("handler/profile_handler.php?action=getUserImages", function(data)
+	$.get("php/profile.php?action=getUserImages", function(data)
 	{
-		//$("#userImagesDisplay");
-		//data = JSON.parse(data);
+		/*$("#userImagesDisplay");
+		data = JSON.parse(data);
 		console.log(data);
 		for (var i = 0; i < data.length; i++) {
 			$("#userImagesDisplay").append("<img src='"+data[i].url+"'/>");
-		}
+		}*/
 		//var ar = JSON.parse(data);
 		//console.log(ar);
 	})

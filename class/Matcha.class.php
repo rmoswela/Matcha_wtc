@@ -18,7 +18,7 @@ class Matcha
   {
     $uname = $_SESSION['username'];
     $this->connection = $this->start->server_connect();
-    $sql = $this->connection->prepare("SELECT * FROM users WHERE username = :uname");
+    $sql = $this->connection->prepare("SELECT user_id, username, gender FROM profile, users WHERE profile.user_id = users.id AND users.username = :uname");
     $sql->bindParam(":uname", $uname);
     $sql->execute();
     $this->results = $sql->fetch();
