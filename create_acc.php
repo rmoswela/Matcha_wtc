@@ -60,9 +60,6 @@ if (isset($_POST['submit']))
         header("refresh: 3; register.php");
         return;
       }
-      else {
-        $err_val = "<br><strong>this email doesn't exist in the database</strong><br>";
-      }
       $sql = $conn->prepare("INSERT INTO users(`firstname`, `lastname`, `username`, `email`, `password`)
       VALUES('".$fname."','".$lname."', '".$uname."', '".$email."', '".$passw."')");
       if ($sql->execute())

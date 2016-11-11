@@ -5,7 +5,7 @@ function refreshList(suggest)
   var j = 0;
   while (j < 3)
   {
-    document.getElementById('sugg_id_'+j).innerHTML = suggest[i].firstname;
+    document.getElementById('user_link_'+j).innerHTML = suggest[i].firstname;
     i++;
     j++;
     if (!suggest[i])
@@ -19,7 +19,7 @@ function refreshList(suggest)
   {
     while (j < 3)
     {
-      document.getElementById('sugg_id_'+j).innerHTML = suggest[i].firstname;
+      document.getElementById('user_link_'+j).innerHTML = suggest[i].firstname;
       i++;
       j++;
       if (!suggest[i])
@@ -35,6 +35,7 @@ function refreshList(suggest)
 ///////////////////////////// function to get the suggested users for a logged in usr////////////////////////////////
 function loadSuggestions()
 {
+
   var xhr = new XMLHttpRequest();
   var param = "name=zamani&page=index.php";
 
@@ -54,29 +55,35 @@ function loadSuggestions()
 
         while (i < 3) {
           var s_list = document.createElement('div');
+          var user_link = document.createElement('a');
           s_list.setAttribute('class', "suggested-profile");
           s_list.setAttribute('id', "sugg_id_"+i);
+          user_link.setAttribute('href', "#");
+          user_link.setAttribute('id', "user_link_"+i);
+          s_list.appendChild(user_link);
           right_content.appendChild(s_list);
           i++;
         }
-        console.log(list.suggest);
         if (list.suggest != undefined)
         {
           refreshList(list.suggest);
         }
         if (list.match != undefined)
         {
-          console.log(list.match[0][1]);
           var i = 0;
           while (list.match[i]) {
             var b_list = document.createElement('div');
+            var user_link = document.createElement('a');
             b_list.setAttribute('class', "best-match-profile");
+            user_link.setAttribute('href', "#");
             b_list.setAttribute('id', "best_id_"+i);
-            b_list.innerHTML = list.match[i].firstname;
+            user_link.innerHTML = list.match[i].firstname;
+            b_list.appendChild(user_link);
             best_content.appendChild(b_list);
+            console.log("list.match");
             i++;
           }
-          console.log(i);
+          console.log(xhr.responseText);
         }
       }
       else {
