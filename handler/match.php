@@ -7,8 +7,11 @@ if (isset($_SESSION['username']))
 {
   try
   {
-    $match = new Matcha($start);
-    print ($match->suggest());
+    $matcha = new Matcha($start);
+    $suggested = $matcha->suggest();
+    $best_match = $matcha->best_match();
+    $data = json_encode(array('suggest' => $suggested, 'match' => $best_match));
+    print ($data);
   }
   catch(PDOEXception $e)
   {

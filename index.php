@@ -18,14 +18,7 @@
     <div class="main-content">
       <div id="left-content"><h3>welcome</h3></div>
       <div id="best-match">
-        <table>
-        <tr>
           <label for="best-match">Best Matches</label>
-        </tr>
-        <tr>
-
-        </tr>
-      </table>
       </div>
       <div id="right-content"><h3>You may like</h3></div>
     </div>
