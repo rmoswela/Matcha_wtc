@@ -7,12 +7,15 @@ if (isset($_SESSION['username']))
 {
   try
   {
-    $min = htmlspecialchars(trim($_POST['min_age']));
-    $max = htmlspecialchars(trim($_POST['max_age']));
     if (!isset($_POST['submit']))
     {
       $min = 0;
       $max = 100;
+    }
+    else
+    {
+      $min = htmlspecialchars(trim($_POST['min_age']));
+      $max = htmlspecialchars(trim($_POST['max_age']));
     }
     //print ($min." and " .$max);
     $matcha = new Matcha($start);
