@@ -12,7 +12,7 @@
 
     if ($_POST['submit'] == "LIKE")
     {
-      $sql_liker = $conn->prepare("SELECT id FROM users WHERE username=:uname");     
+      $sql_liker = $conn->prepare("SELECT id FROM users WHERE username=:uname");
       $sql_like = $conn->prepare("INSERT INTO likes (likes_id, liked_id)
         VALUES (:liker, :likee)");
       $sql_liker->execute(array(':uname' => $_SESSION['username']));
@@ -42,7 +42,7 @@
     <link rel="stylesheet" type="text/css" href="css/error.css">
     <link rel="stylesheet" type="text/css" href="css/profile.css">
   </head>
-  <body background="./images/love-sand.jpg">
+  <body background="./mages/love-sand.jpg">
     <header>
       <span><a style="color:rgba(255,23,68 ,.9)" href="index.php">Vicini</a></span> Love
     </header>
