@@ -7,7 +7,7 @@
     <link rel="stylesheet" type="text/css" href="css/browse.css">
     <link rel="stylesheet" type="text/css" href="../css/error.css">
   </head>
-  <body onload="loadSuggestions(null)">
+  <body onload="loadSuggestions()">
     <header>
       <span><a style="color:rgba(255,23,68 ,.9)" href="../index.php">Vicini</a></span> Love
       <div id="header-pane">
@@ -39,7 +39,7 @@
               <label class="filter-title" for="from">Age from:</label>
             </td>
             <td>
-              <select class="age-filter" name="age" id="from"><option selected="selected">min-age</option></select>
+              <select onclick="remove_error();clear_filter()" class="age-filter" name="age" id="from"><option selected="selected">min-age</option></select>
             </td>
           </tr>
           <tr>
@@ -47,7 +47,7 @@
               <label for="upto">Age upto:</label>
             </td>
             <td>
-              <select class="age-filter" name="age" id="upto"><option selected="selected">max-age</option></select>
+              <select onclick="remove_error();clear_filter()" class="age-filter" name="age" id="upto"><option selected="selected">max-age</option></select>
             </td>
           </tr>
           <tr>
@@ -61,6 +61,13 @@
           <tr>
             <td>
               <button id="filter" onclick="filter_list()" type="button" name="submit">filter</button>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div style="color: red; margin-top:8%; display:none"class="error-div" id="filter_error">
+                <label for="error">ERROR:</label>
+              </div>
             </td>
           </tr>
         </table>

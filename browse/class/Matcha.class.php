@@ -56,7 +56,7 @@ class Matcha
     $this->connection = null;
   }
 
-  public function best_match()
+  public function best_match($min, $max)
   {
     $this->connection = $this->start->server_connect();
     $sql = $this->connection->prepare("SELECT users.id, user_id, username, gender, sexual_preference, interests FROM profile, users
@@ -67,10 +67,13 @@ class Matcha
     $interests = "%".$this->results['interests']."%";
     if (count($this->results) > 1 && $this->results['sexual_preference'] == "female")
     {
-      $sql_best_match = $this->connection->prepare("SELECT users.firstname, users.lastname, profile.gender
+      $sql_best_match = $this->connection->prepare("SELECT profile.age, users.firstname, users.lastname, profile.gender
                                                     FROM users, profile WHERE profile.user_id = users.id
+                                                    AND profile.age >= :min AND profile.age <= :max
                                                     AND profile.gender = 'female' AND profile.interests
                                                     LIKE :inter AND profile.user_id != :id ");
+      $sql_best_match->bindParam(":min", $min);
+      $sql_best_match->bindParam(":max", $max);
       $sql_best_match->bindParam(":inter", $interests);
       $sql_best_match->bindParam(":id", $this->results['id']);
       $sql_best_match->execute();
@@ -79,10 +82,13 @@ class Matcha
     }
     if (count($this->results) > 1 && $this->results['sexual_preference'] == "male")
     {
-      $sql_best_match = $this->connection->prepare("SELECT users.firstname, users.lastname, profile.gender
+      $sql_best_match = $this->connection->prepare("SELECT profile.age, users.firstname, users.lastname, profile.gender
                                                     FROM users, profile WHERE profile.user_id = users.id
+                                                    AND profile.age >= :min AND profile.age <= :max
                                                     AND profile.gender = 'male' AND profile.interests
                                                     LIKE :inter AND profile.user_id != :id ");
+      $sql_best_match->bindParam(":min", $min);
+      $sql_best_match->bindParam(":max", $max);
       $sql_best_match->bindParam(":inter", $interests);
       $sql_best_match->bindParam(":id", $this->results['id']);
       $sql_best_match->execute();
