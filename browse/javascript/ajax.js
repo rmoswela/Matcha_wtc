@@ -1,4 +1,17 @@
-/////////////////////////////////function to refresh the suggested list /////////////////////////////////////////
+/////////function to filter the list according to the users needs///////////////
+function filter_list()
+{
+  alert("clicked");
+  var age_opt_to = document.getElementById('upto');
+  var age_opt_from = document.getElementById('from');
+  var to_selected_age = age_opt_to.options[age_opt_to.selectedIndex].text;
+  var from_selected_age = age_opt_from.options[age_opt_from.selectedIndex].text;
+  var post_data = "min_age="+from_selected_age+"&max_age="+to_selected_age;
+  return (post_data);
+  console.log(from_selected_age+"\n"+to_selected_age);
+}
+
+/////////////////////////////////function to refresh the suggested list ////////
 function refreshList(suggest)
 {
   var i = 0;
@@ -32,12 +45,13 @@ function refreshList(suggest)
   }, 60000);
 }
 
-///////////////////////////// function to get the suggested users for a logged in usr////////////////////////////////
-function loadSuggestions()
+//////function to get the suggested users for a logged in usr///////////////////
+var data_post = filter_list();
+function loadSuggestions(data_post)
 {
 
   var xhr = new XMLHttpRequest();
-  var param = "name=zamani&page=index.php";
+  var param = data_post;
 
   xhr.open("POST", "handler/match.php", true);
   xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
@@ -52,7 +66,6 @@ function loadSuggestions()
       if (xhr.status == 200)
       {
         list = JSON.parse(xhr.responseText);
-
         while (i < 3) {
           var s_list = document.createElement('div');
           var user_link = document.createElement('a');
@@ -68,6 +81,7 @@ function loadSuggestions()
         {
           refreshList(list.suggest);
         }
+        ///////////////adding the best-match list to best-match-profile div///////////////////////
         if (list.match != undefined)
         {
           var i = 0;
@@ -80,10 +94,9 @@ function loadSuggestions()
             user_link.innerHTML = list.match[i].firstname;
             b_list.appendChild(user_link);
             best_content.appendChild(b_list);
-            console.log("list.match");
             i++;
           }
-          console.log(xhr.responseText);
+          //console.log(xhr.responseText);
         }
       }
       else {

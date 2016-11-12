@@ -32,7 +32,7 @@ else {
   If you feel this is annoying, we know, but this is solely
   done to ensure maximum security of your personal data.';
   $headers = 'From:noreply@vicinilove.com'."\r\n";
-  $error_report = mail($to, $subject, $message, $headers);
+  $error_report = true;//= mail($to, $subject, $message, $headers);
   if ($error_report === true)
   {
     echo "
