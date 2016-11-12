@@ -67,6 +67,7 @@ if(isset($_POST['submit']))
         print "<div id='error' onclick='disappear()'>".$start->__getReport()."</div>";
         return;
       }
+      $conn->query("UPDATE users SET online = 1 WHERE username = '".$uname."'");
       $_SESSION['logged-out'] = false;
 			$_SESSION['username'] = $res['username'];
       $_SESSION['firstname'] = $res['firstname'];
