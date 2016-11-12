@@ -25,7 +25,7 @@
           <tr><td><a href="#" id="check-location">Location:</a></td></tr>
           <tr>
             <td>
-              <button id="filter"type="button" name="submit">sort</button>
+              <button class="data-contol" id="filter"type="button" name="submit">sort</button>
             </td>
           </tr>
         </table>
@@ -39,7 +39,7 @@
               <label class="filter-title" for="from">Age from:</label>
             </td>
             <td>
-              <select onclick="remove_error();clear_filter()" class="age-filter" name="age" id="from"><option selected="selected">min-age</option></select>
+              <select onclick="remove_error();clear_filter()" class="age-filter" name="age" id="from"><option id="default_min" selected="selected">min-age</option></select>
             </td>
           </tr>
           <tr>
@@ -47,7 +47,7 @@
               <label for="upto">Age upto:</label>
             </td>
             <td>
-              <select onclick="remove_error();clear_filter()" class="age-filter" name="age" id="upto"><option selected="selected">max-age</option></select>
+              <select onclick="remove_error();clear_filter()" class="age-filter" name="age" id="upto"><option id="default_max" selected="selected">max-age</option></select>
             </td>
           </tr>
           <tr>
@@ -60,13 +60,16 @@
           </tr>
           <tr>
             <td>
-              <button id="filter" onclick="filter_list()" type="button" name="submit">filter</button>
+              <button class="data-contol" id="filter" onclick="filter_list()" type="button" name="submit">filter</button>
+            </td>
+            <td>
+              <button id="clear_filter" onclick="clear_refresh()" type="button" name="submit">clear filters</button>
             </td>
           </tr>
           <tr>
             <td>
-              <div style="color: red; margin-top:8%; display:none"class="error-div" id="filter_error">
-                <label for="error">ERROR:</label>
+              <div style="color: red; margin-top:8%; display:none" class="error-div" id="filter_error">
+                <label id="error-label" for="error">ERROR:</label>
               </div>
             </td>
           </tr>

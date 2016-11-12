@@ -4,6 +4,12 @@ function remove_error()
   document.getElementById('filter_error').style.display = "none";
 }
 
+function clear_refresh()
+{
+  clear_filter();
+  location.reload();
+}
+
 function clear_filter()
 {
   sessionStorage.removeItem('param');
@@ -19,10 +25,10 @@ function filter_list(data)
   if (to_selected_age < from_selected_age)
   {
     document.getElementById('filter_error').style.display = "inline";
-    document.getElementById('filter_error').innerHTML = "ERROR!";
+    document.getElementById('filter_error').style.marginTop = "8%";
+    document.getElementById('error-label').innerHTML = "ERROR!";
     return;
   }
-  console.log(param);
   if (sessionStorage.getItem('param') != null)
   {
     var param = sessionStorage.getItem('param');
@@ -99,8 +105,15 @@ function loadSuggestions()
   if (sessionStorage.getItem('param'))
   {
     param = sessionStorage.getItem('param');
+    var res = param.split("&");
+    res = res[1].split("=")[1];
+    document.getElementById('default_min').innerHTML = res;
+    var res = param.split("&");
+    res = res[2].split("=")[1];
+    document.getElementById('default_max').innerHTML = res;
+    document.getElementById('clear_filter').style.opacity = "1";
+    document.getElementById('clear_filter').style.pointerEvents = "all";
   }
-
   xhr.open("POST", "handler/match.php", true);
   xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
   xhr.onreadystatechange = function()
