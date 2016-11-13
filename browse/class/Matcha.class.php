@@ -24,12 +24,12 @@ class Matcha
   {
     $this->username = $_SESSION['username'];
     $this->connection = $this->start->server_connect();
-    $sql = $this->connection->prepare("SELECT users.id, user_id, username, gender FROM profile, users
+    $sql = $this->connection->prepare("SELECT users.id, sexual_pref, user_id, username, gender FROM profile, users
                                        WHERE profile.user_id = users.id AND users.username = :uname");
     $sql->bindParam(":uname", $this->username);
     $sql->execute();
     $this->results = $sql->fetch();
-    if (count($this->results) > 1 && $this->results['gender'] == "male")
+    if (count($this->results) > 1 && $this->results['sexual_pref'] == "male")
     {
       $sql_suggestions = $this->connection->query("SELECT users.firstname, users.lastname, profile.gender FROM users, profile
                                                    WHERE profile.user_id = users.id AND profile.gender = 'female'
@@ -37,7 +37,7 @@ class Matcha
       $suggest_list = $sql_suggestions->fetchAll();
       return ($suggest_list);
     }
-    if (count($this->results) > 1 && $this->results['gender'] == "female")
+    if (count($this->results) > 1 && $this->results['sexual_pref'] == "female")
     {
       $sql_suggestions = $this->connection->query("SELECT users.firstname, users.lastname, profile.gender FROM users, profile
                                                    WHERE profile.user_id = users.id AND profile.gender = 'male'
@@ -45,7 +45,7 @@ class Matcha
       $suggest_list = $sql_suggestions->fetchAll();
       return ($suggest_list);
     }
-    if (count($this->results) > 1 && $this->results['gender'] == "bisexual")
+    else
     {
       $sql_suggestions = $this->connection->query("SELECT users.firstname, users.lastname, profile.gender FROM users, profile
                                                    WHERE profile.user_id = users.id
