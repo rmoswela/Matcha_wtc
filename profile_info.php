@@ -7,7 +7,7 @@
     <link rel="stylesheet" type="text/css" href="css/error.css">
     <link rel="stylesheet" type="text/css" href="css/profile.css">
   </head>
-  <body background="./mages/love-sand.jpg">
+  <body background="">
     <header>
       <span><a style="color:rgba(255,23,68 ,.9)" href="index.php">Vicini</a></span> Love
     </header>
@@ -16,7 +16,7 @@
         session_start();
         require_once("db_object.php");
         try {
-
+          if (isset($_GET))
           $conn = $start->server_connect();
           $sql = $conn->prepare("SELECT id, firstname, lastname, online, last_seen
             FROM users WHERE username=:user");

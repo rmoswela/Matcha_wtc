@@ -38,11 +38,10 @@
     <meta charset="utf-8">
     <title>vicinilove</title>
     <link rel="stylesheet" type="text/css" href="css/header.css">
-    <link rel="stylesheet" type="text/css" href="css/login.css">
     <link rel="stylesheet" type="text/css" href="css/error.css">
     <link rel="stylesheet" type="text/css" href="css/profile.css">
   </head>
-  <body background="./mages/love-sand.jpg">
+  <body background="">
     <header>
       <span><a style="color:rgba(255,23,68 ,.9)" href="index.php">Vicini</a></span> Love
     </header>
@@ -83,10 +82,8 @@
                 }
             ?>
         </div>
-    <footer><span style="color: rgba(0, 0, 0, 0.5)">website by:</span> <a href="https://twitter.com/TheeRapDean">@TheeRapDean</a>
+    <footer style="position: fixed;"><span style="color: rgba(0, 0, 0, 0.5)">website by:</span> <a href="https://twitter.com/TheeRapDean">@TheeRapDean</a>
       <br><p>Copyright (c) 2016 emsimang All Rights Reserved.</p>
     </footer>
-    <script type="text/javascript" src="javascript/login.js">
-    </script>
   </body>
 </html>
