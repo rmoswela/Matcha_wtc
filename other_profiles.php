@@ -57,6 +57,11 @@
       $result_prof->bindParam(":id", $liked_result, PDO::PARAM_INT);
       $result_prof->execute();
     }
+
+    if (isset($_POST['submit']) && substr($_POST['submit'], 0, 9) == "CHAT WITH")
+    {
+      header("Location: chat.php?user=" . $_POST['username']);
+    }
 ?>
 
 <html>
