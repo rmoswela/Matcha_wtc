@@ -59,13 +59,13 @@ class Matcha
   public function best_match($min, $max)
   {
     $this->connection = $this->start->server_connect();
-    $sql = $this->connection->prepare("SELECT users.id, user_id, username, gender, sexual_preference, interests FROM profile, users
+    $sql = $this->connection->prepare("SELECT users.id, user_id, username, gender, sexual_pref, interests FROM profile, users
                                        WHERE profile.user_id = users.id AND users.username = :uname");
     $sql->bindParam(":uname", $this->username);
     $sql->execute();
     $this->results = $sql->fetch();
     $interests = "%".$this->results['interests']."%";
-    if (count($this->results) > 1 && $this->results['sexual_preference'] == "female")
+    if (count($this->results) > 1 && $this->results['sexual_pref'] == "female")
     {
       $sql_best_match = $this->connection->prepare("SELECT profile.age, users.firstname, users.lastname, profile.gender
                                                     FROM users, profile WHERE profile.user_id = users.id
@@ -80,7 +80,7 @@ class Matcha
       $best_match = $sql_best_match->fetchAll();
       return ($best_match);
     }
-    if (count($this->results) > 1 && $this->results['sexual_preference'] == "male")
+    if (count($this->results) > 1 && $this->results['sexual_pref'] == "male")
     {
       $sql_best_match = $this->connection->prepare("SELECT profile.age, users.firstname, users.lastname, profile.gender
                                                     FROM users, profile WHERE profile.user_id = users.id

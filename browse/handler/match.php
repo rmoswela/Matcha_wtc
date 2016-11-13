@@ -3,7 +3,6 @@ session_start();
 require_once "../../db_object.php";
 require_once "../class/Matcha.class.php";
 
-print_r($_POST);
 if (isset($_SESSION['username']))
 {
   try
