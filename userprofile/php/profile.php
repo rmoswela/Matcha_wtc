@@ -5,6 +5,10 @@
   //$location = file_get_contents('http://freegeoip.net/json/'.$_SERVER['REMOTE_ADDR']);
 	$location = json_decode(file_get_contents("http://ipinfo.io/"));
 
+	$arr = json_decode(file_get_contents("https://ipapi.co/json/"));
+
+	$city = explode('/', $arr->timezone);
+	$location = $city[1];
 	if (filter_input(INPUT_POST, 'biography', FILTER_SANITIZE_STRING))
 	{
 
@@ -25,7 +29,7 @@
 		if (profileExists($_SESSION['user_id'], $conn) === 0)
 		{
 			try {
-				$loc = $location->loc;
+				$loc = $location;
 				$sql = "INSERT INTO profile (`age`,`user_id`,`gender`,`sexual_preference`,`biography`,`interests`,`agefrom`,`toage`,`location`)"
 				." VALUES ($userAge,$user_id, '$userGender','$lookingFor','$biography','$userPreference',$beginAge,$endAge, $loc)";
 				$conn->exec($sql);
@@ -41,7 +45,7 @@
 				$stmt = $conn->prepare("UPDATE profile "
 				."SET `age`=:age, `gender`=:gender,`sexual_preference`=:sexual_preference,"
 				." `biography`=:biography,`interests`=:interests,`agefrom`=:agefrom,`toage`=:toage, `location`=:location WHERE `user_id`=$user_id");
-				$loc = $location->loc;
+				$loc = $location;
 
 				$stmt->bindParam(':age', $userAge);
 				$stmt->bindParam(':gender', $userGender);
@@ -52,6 +56,7 @@
 				$stmt->bindParam(':toage', $endAge);
 				$stmt->bindParam(':location', $loc);
 				$stmt->execute();
+
 				//$stmt->execute(array($_SESSION['user_id'], $userGender, $lookingFor,$biography, $userPreference, 0));
 				$userId = $conn->lastInsertId();
 				$username = $_SESSION['username'];
@@ -63,15 +68,16 @@
 				$stmt->bindParam(':username', $username);
 				$stmt->execute();
 
-				if ($stmt->rowCount() === 0 )
+				/*if ($stmt->rowCount() < 1)
 				{
 					echo json_encode(array("error"=>1, "status"=>"failed", "message"=>"counld not update"));
 				}
-				else{
+				else{*/
 					echo json_encode(array("error"=>0, "status"=>"success", "message"=>"Profile info updated successfully"));
-				}
+				/*}*/
 			} catch (Exception $e) {
-				echo $e->getMessage();
+				//echo $e->getMessage();
+				echo json_encode(array("error"=>1, "status"=>"failed", "message"=>"counld not update"));
 			}
 		}
 	}
