@@ -15,7 +15,7 @@ function clear_filter()
   sessionStorage.removeItem('param');
 }
 
-function session_store(select_age_from, select_age_to)
+function session_store(select_age_from, select_age_to, location)
 {
   if (sessionStorage.getItem('param') != null)
   {
@@ -23,7 +23,9 @@ function session_store(select_age_from, select_age_to)
   }
   else
   {
-    var param = "submit=post&min_age="+select_age_from+"&max_age="+select_age_to;
+    var param = "submit=post&min_age="
+                +select_age_from+"&max_age="
+                +select_age_to+"&location="+location;
     sessionStorage.setItem('param', param);
   }
 }
@@ -52,7 +54,7 @@ function filter_list(data)
   {
     document.getElementById('filter_error').style.display = "inline";
     document.getElementById('filter_error').style.marginTop = "8%";
-    document.getElementById('error-label').innerHTML = "NaN(age)! || empty filter";
+    document.getElementById('error-label').innerHTML = "NaN or empty";
     return;
   }
   if ((isNaN(select_age_to) && !isNaN(select_age_from)) || (!isNaN(select_age_to) && isNaN(select_age_from)))
@@ -72,7 +74,14 @@ function filter_list(data)
       return;
     }
   }
-  param = session_store(select_age_from, select_age_to);
+  console.log(locale);
+  if(isNaN(select_age_to) && isNaN(select_age_from))
+  {
+    param = session_store(0, 100, locale)
+  }
+  else {
+    param = session_store(select_age_from, select_age_to, locale);
+  }
   xhr.open("POST", "handler/match.php", true);
   xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
   xhr.onreadystatechange = function()
@@ -146,6 +155,9 @@ function loadSuggestions()
     var res = param.split("&");
     res = res[2].split("=")[1];
     document.getElementById('default_max').innerHTML = res;
+    var res = param.split("&");
+    res = res[3].split("=")[1];
+    document.getElementById('location').value = res;
     document.getElementById('clear_filter').style.opacity = "1";
     document.getElementById('clear_filter').style.pointerEvents = "all";
   }
@@ -187,7 +199,7 @@ function loadSuggestions()
         {
           refreshList(list.suggest);
         }
-        ///////////////adding the best-match list to best-match-profile div///////////////////////
+        /////////adding the best-match list to best-match-profile div///////////
         if (list.match != undefined)
         {
           var i = 0;
