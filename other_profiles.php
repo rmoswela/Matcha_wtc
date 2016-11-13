@@ -7,7 +7,7 @@
     $sql->execute(array(':uname' => $_SESSION['username']));
     $other_users = $sql->fetchAll();
     $sql_likee = $conn->prepare("SELECT id FROM users WHERE username=:uname");
-    $sql_likee->execute(array(':uname' => $_SESSION['username']));
+    $sql_likee->execute(array(':uname' => $_POST['username']));
     $likee = $sql_likee->fetch();
 
     if (isset($_POST['submit']) && $_POST['submit'] == "LIKE")
@@ -18,6 +18,19 @@
       $sql_liker->execute(array(':uname' => $_SESSION['username']));
       $liker = $sql_liker->fetch();
       $sql_like->execute(array(':liker' => $liker['id'], ':likee' => $likee['id']));
+
+      $result_not = $conn->prepare("INSERT INTO notifications (type, `from`, `to`) VALUES ('Like', :id_from, :id_to)");
+      $liking_result = $liker['id'];
+      $liked_result = $likee['id'];
+
+      $result_not->bindParam(":id_from", $liking_result, PDO::PARAM_INT);
+      $result_not->bindParam(":id_to", $liked_result,PDO::PARAM_INT);
+      $result_not->execute();
+
+      /*update the users profile with notifications and likes*/
+      $result_prof = $conn->prepare("UPDATE profile SET notif = notif + 1, likes = likes + 1, fame= fame + 1 WHERE user_id = :id");
+      $result_prof->bindParam(":id", $liked_result, PDO::PARAM_INT);
+      $result_prof->execute();
     }
 
     $sql_id = $conn->prepare("SELECT id FROM users WHERE username=:uname");
@@ -26,10 +39,23 @@
 
     if (isset($_POST['submit']) && $_POST['submit'] == "UNLIKE")
     {
-      $query = $user_db->prepare("DELETE FROM likes WHERE
+      $query = $conn->prepare("DELETE FROM likes WHERE
                       likes_id=:id_like AND liked_id=:id_liked");
-      $sql_liked->execute(array(':id_like' => $get_user['id'],
+      $query->execute(array(':id_like' => $get_user['id'],
       'id_liked' => $likee['id']));
+
+      $result_not = $conn->prepare("INSERT INTO notifications (type, `from`, `to`) VALUES ('Unlike', :id_from, :id_to)");
+      $liking_result = $get_user['id'];
+      $liked_result = $likee['id'];
+
+      $result_not->bindParam(":id_from", $liking_result, PDO::PARAM_INT);
+      $result_not->bindParam(":id_to", $liked_result,PDO::PARAM_INT);
+      $result_not->execute();
+
+      /*update the users profile with notifications and likes*/
+      $result_prof = $conn->prepare("UPDATE profile SET notif = notif + 1, likes = likes - 1, fame= fame - 1 WHERE user_id = :id");
+      $result_prof->bindParam(":id", $liked_result, PDO::PARAM_INT);
+      $result_prof->execute();
     }
 ?>
 
@@ -38,14 +64,15 @@
     <meta charset="utf-8">
     <title>vicinilove</title>
     <link rel="stylesheet" type="text/css" href="css/header.css">
+    <link rel="stylesheet" type="text/css" href="css/login.css">
     <link rel="stylesheet" type="text/css" href="css/error.css">
     <link rel="stylesheet" type="text/css" href="css/profile.css">
   </head>
-  <body background="">
+  <body background="./mages/love-sand.jpg">
     <header>
       <span><a style="color:rgba(255,23,68 ,.9)" href="index.php">Vicini</a></span> Love
+          <a href="logout.php">Logout</a>
     </header>
-      <div id='container'>
             <?php
                 foreach ($other_users as $user)
                 {
@@ -60,7 +87,15 @@
                       'id_liked' => $user['id']));
                     $get_liked = $sql_liked->fetch();
 
-                    if ($get_liked)
+                    $sql_isliked = $conn->prepare("SELECT id FROM likes WHERE
+                      likes_id=:id_like AND liked_id=:id_liked");
+                    $sql_isliked->execute(array(':id_like' => $user['id'],
+                      'id_liked' => $get_user['id']));
+                    $get_isliked = $sql_isliked->fetch();
+                    
+                    if ($get_liked && $get_isliked)
+                      $like_value = "CHAT WITH " . strtoupper($user['firstname']);
+                    else if ($get_liked)
                       $like_value = "UNLIKE";
                     else
                       $like_value = "LIKE";
@@ -81,9 +116,10 @@
                     }
                 }
             ?>
-        </div>
-    <footer style="position: fixed;"><span style="color: rgba(0, 0, 0, 0.5)">website by:</span> <a href="https://twitter.com/TheeRapDean">@TheeRapDean</a>
+    <footer><span style="color: rgba(0, 0, 0, 0.5)">website by:</span> <a href="https://twitter.com/TheeRapDean">@TheeRapDean</a>
       <br><p>Copyright (c) 2016 emsimang All Rights Reserved.</p>
     </footer>
+    <script type="text/javascript" src="javascript/login.js">
+    </script>
   </body>
 </html>
