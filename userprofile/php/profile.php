@@ -3,7 +3,8 @@
 //	var_dump($_SESSION);
 //	if (isset($_POST['profileForm']))
   //$location = file_get_contents('http://freegeoip.net/json/'.$_SERVER['REMOTE_ADDR']);
-	$location = array("city"=>"Maseru", "country"=>"Lesotho");
+	$location = json_decode(file_get_contents("http://ipinfo.io/"));
+
 	if (filter_input(INPUT_POST, 'biography', FILTER_SANITIZE_STRING))
 	{
 
@@ -24,7 +25,7 @@
 		if (profileExists($_SESSION['user_id'], $conn) === 0)
 		{
 			try {
-				$loc = $location['city'];
+				$loc = $location->loc;
 				$sql = "INSERT INTO profile (`age`,`user_id`,`gender`,`sexual_preference`,`biography`,`interests`,`agefrom`,`toage`,`location`)"
 				." VALUES ($userAge,$user_id, '$userGender','$lookingFor','$biography','$userPreference',$beginAge,$endAge, $loc)";
 				$conn->exec($sql);
@@ -40,8 +41,7 @@
 				$stmt = $conn->prepare("UPDATE profile "
 				."SET `age`=:age, `gender`=:gender,`sexual_preference`=:sexual_preference,"
 				." `biography`=:biography,`interests`=:interests,`agefrom`=:agefrom,`toage`=:toage, `location`=:location WHERE `user_id`=$user_id");
-				print_r($location);
-				$loc = $location['city'];
+				$loc = $location->loc;
 
 				$stmt->bindParam(':age', $userAge);
 				$stmt->bindParam(':gender', $userGender);
