@@ -25,6 +25,7 @@ $(document).ready(function()
 	/*************************** GET DATA FOR THE PAGE **************************/
 	$.get("php/profile.php?action=getUserImages", function(data)
 	{
+		//console.log(data);
 		//$("#userImagesDisplay");
 		data = JSON.parse(data);
 		images = data;
@@ -144,7 +145,23 @@ $(document).ready(function()
 	})
 
 
-		$.get("http://ipinfo.io", function (response) {
+	//////////////////// GET USER LIKES /////////////
+	$.get("php/profile.php?action=getUserLikes", function(data)
+	{
+		var userLikes = JSON.parse(data);
+		/////////////////SET INTITIAL VALUES FOR THE USER profile
+		if (userLikes.length > 0)
+		{
+			for (var i = 0; i < userLikes.length; i++) {
+				console.log(userLikes[i].username);
+				var div = "<div class='card'> <h3 id='likeName'>"+userLikes[i].username+" </h3></div>";
+				$("#userLikes").append(div);
+			}
+		}
+	})
+
+
+		/*$.get("http://ipinfo.io", function (response) {
 		    //$("#ip").html("IP: " + response.ip);
 		    //$("#address").html("Location: " + response.city + ", " + response.region);
 		    //$("#details").html(JSON.stringify(response, null, 4));
@@ -155,11 +172,14 @@ $(document).ready(function()
 				//alert("Share your location : "+response.city + response.loc);
 				var x;
 		    if (confirm("Share your location! \n"+response.loc) == true) {
-		        x = "You pressed OK!";
+		        //x = "You pressed OK!";
 		    } else {
-		        x = "You pressed Cancel!";
+		      //  x = "You pressed Cancel!";
 		    }
 		}, "jsonp");
+		*/
+
+
 });
 
 var makeprofile = function(index)

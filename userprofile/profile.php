@@ -111,6 +111,9 @@ if (!isset($_SESSION['user_id']))
 			<!-- LIKES PAGE -->
 			<div id="likes" class="hidden page">
 				<h3>Likes</h3>
+				<div id="userLikes">
+
+				</div>
 			</div>
 
 			<!-- /////////////////////////////////////////////////////////////////////////////////////// -->
@@ -153,6 +156,7 @@ if (!isset($_SESSION['user_id']))
 		</div>
 	</div>
 </body>
+
 <script type="text/javascript" src="js/jquery.js"></script>
 <script type="text/javascript" src="js/profile.js"></script>
 </html>

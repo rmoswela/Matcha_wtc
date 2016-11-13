@@ -2,8 +2,9 @@
 	require_once("../config/init.php");
 //	var_dump($_SESSION);
 //	if (isset($_POST['profileForm']))
-  $location = file_get_contents('http://freegeoip.net/json/'.$_SERVER['REMOTE_ADDR']);
-  if (filter_input(INPUT_POST, 'biography', FILTER_SANITIZE_STRING))
+  //$location = file_get_contents('http://freegeoip.net/json/'.$_SERVER['REMOTE_ADDR']);
+	$location = array("city"=>"Maseru", "country"=>"Lesotho");
+	if (filter_input(INPUT_POST, 'biography', FILTER_SANITIZE_STRING))
 	{
 
 		$firstname = trim(filter_input(INPUT_POST, 'firstname', FILTER_SANITIZE_STRING));
@@ -39,7 +40,9 @@
 				$stmt = $conn->prepare("UPDATE profile "
 				."SET `age`=:age, `gender`=:gender,`sexual_preference`=:sexual_preference,"
 				." `biography`=:biography,`interests`=:interests,`agefrom`=:agefrom,`toage`=:toage, `location`=:location WHERE `user_id`=$user_id");
+				print_r($location);
 				$loc = $location['city'];
+
 				$stmt->bindParam(':age', $userAge);
 				$stmt->bindParam(':gender', $userGender);
 				$stmt->bindParam(':sexual_preference', $lookingFor);
@@ -84,7 +87,7 @@
 	 {
 		 $sql = "DELETE FROM `photos` WHERE `user_id`=$user_id";
 		 $conn->exec($sql);
-		for ($i = 0; $i < $totalFiles; $i++) {
+		 for ($i = 0; $i < $totalFiles; $i++) {
 				$date = new DateTime();
 				$date = $date->getTimestamp()+"";
 				$uploadDir = "images/$date".$_FILES['photos']['name'][$i];
@@ -161,6 +164,29 @@ else if (isset($_GET['action']) && ($_GET['action'] == "userProfile"))
 		$res	=	array("errors"=>1, "message"=>$e->getMessage(), "status"=>"failed");
 	}
 }
+
+else if (isset($_GET['action']) && ($_GET['action'] == "getUserLikes"))
+{
+	try {
+		$sql = "SELECT `likes`.`likes_id`,`users`.`username`
+						FROM `users`,`likes`
+						WHERE `likes`.`liked_id`=:userid
+						AND `likes`.`likes_id` = `users`.`id`";
+		$user_id = $_SESSION['user_id'];
+		$stmt = $conn->prepare($sql);
+		$stmt->bindParam(':userid', $user_id);
+		$stmt->execute();
+		$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		if ($stmt->rowCount() > 0)
+			echo json_encode($result);
+		else {
+			$res	=	array("errors"=>1, "message"=>$e->getMessage(), "status"=>"failed");
+			echo json_encode($res);
+		}
+	} catch (Exception $e) {
+		$res	=	array("errors"=>1, "message"=>$e->getMessage(), "status"=>"failed");
+	}
+}
 else{
 		echo json_encode(array("error"=>"1", "message"=>"no option selected", "status"=>"failed"));
 	}
@@ -169,6 +195,7 @@ else{
 	{
 		 $res =$conn->prepare("SELECT * FROM profile WHERE user_id=$user_id");
 		 $res->execute();
-			return($res->rowCount());
+		return($res->rowCount());
 	}
+
 ?>

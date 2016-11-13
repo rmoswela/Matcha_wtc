@@ -104,6 +104,13 @@ input[type="submit"]{
 	float: right;
 }
 
+.card{
+	width: 100%;
+	padding: 10px;
+	border-bottom: 1px dotted #ccc;
+	font-weight: lighter;
+}
+
 .dark-primary-color    { background: #7B1FA2; }
 .default-primary-color { background: #9C27B0; }
 .light-primary-color   { background: #E1BEE7; }
