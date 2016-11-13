@@ -7,10 +7,10 @@
     $sql->execute(array(':uname' => $_SESSION['username']));
     $other_users = $sql->fetchAll();
     $sql_likee = $conn->prepare("SELECT id FROM users WHERE username=:uname");
-    $sql_likee->execute(array(':uname' => $_POST['username']));
+    $sql_likee->execute(array(':uname' => $_SESSION['username']));
     $likee = $sql_likee->fetch();
 
-    if ($_POST['submit'] == "LIKE")
+    if (isset($_POST['submit']) && $_POST['submit'] == "LIKE")
     {
       $sql_liker = $conn->prepare("SELECT id FROM users WHERE username=:uname");
       $sql_like = $conn->prepare("INSERT INTO likes (likes_id, liked_id)
@@ -24,7 +24,7 @@
     $sql_id->execute(array(':uname' => $_SESSION['username']));
     $get_user = $sql_id->fetch();
 
-    if ($_POST['submit' == "UNLIKE"])
+    if (isset($_POST['submit']) && $_POST['submit'] == "UNLIKE")
     {
       $query = $user_db->prepare("DELETE FROM likes WHERE
                       likes_id=:id_like AND liked_id=:id_liked");
@@ -50,7 +50,7 @@
             <?php
                 foreach ($other_users as $user)
                 {
-                    $sql_pic = $conn->prepare("SELECT profile_picture FROM profile
+                    $sql_pic = $conn->prepare("SELECT profile_pic FROM profile
                       WHERE user_id=:id");
                     $sql_pic->execute(array(':id' => $user['id']));
                     $get_pic = $sql_pic->fetch();
@@ -68,7 +68,7 @@
 
                     if ($get_pic)
                     {
-                      $src_pic = $get_pic['profile_picture'];
+                      $src_pic = $get_pic['profile_pic'];
 
                       echo '<div id="profiles">
                             <form method="post" action="#">

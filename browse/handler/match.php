@@ -3,6 +3,7 @@ session_start();
 require_once "../../db_object.php";
 require_once "../class/Matcha.class.php";
 
+print_r($_POST);
 if (isset($_SESSION['username']))
 {
   try
@@ -14,8 +15,16 @@ if (isset($_SESSION['username']))
     }
     else
     {
-      $min = htmlspecialchars(trim($_POST['min_age']));
-      $max = htmlspecialchars(trim($_POST['max_age']));
+      if (strcmp($_POST['min_age'], "min-age") == 0 && strcmp($_POST['max_age'], "max-age"))
+      {
+        $min = 0;
+        $max = 100;
+      }
+      else
+      {
+        $min = htmlspecialchars(trim($_POST['min_age']));
+        $max = htmlspecialchars(trim($_POST['max_age']));
+      }
     }
     //print ($min." and " .$max);
     $matcha = new Matcha($start);

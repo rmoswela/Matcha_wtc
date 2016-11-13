@@ -92,21 +92,23 @@ class Database
                );")or die(print_r($pdo->errorInfo(), true));
 
     $pdo->query("CREATE TABLE IF NOT EXISTS profile(
-                id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
-                user_id INT NOT NULL,
-                profile_picture TEXT NOT NULL,
-                gender VARCHAR(20) NOT NULL,
-                age INT NOT NULL,
-                agefrom INT NOT NULL,
-                toage INT NOT NULL,
-                sexual_preference TEXT NOT NULL,
-                biography TEXT NOT NULL,
-                interests TEXT NOT NULL,
-                update_date DATETIME ,
-                fame INT NOT NULL,
-                likes INT NOT NULL,
-                location TEXT
-               );")or die(print_r($pdo->errorInfo(), true));
+            id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
+            user_id INT NOT NULL,
+            profile_pic TEXT NOT NULL,
+            gender VARCHAR(20) NOT NULL,
+            age INT NOT NULL,
+            agefrom INT NOT NULL,
+            toage INT NOT NULL,
+            sexual_pref TEXT NOT NULL,
+            biography TEXT NOT NULL,
+            interests TEXT NOT NULL,
+            update_date DATETIME ,
+            fame INT NOT NULL,
+         	  notif INT NOT NULL,
+         	  views INT NOT NULL,
+            likes INT NOT NULL,
+         		location TEXT
+            );")or die(print_r($pdo->errorInfo(), true));
 
     $pdo->query("CREATE TABLE IF NOT EXISTS likes(
                 id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
@@ -134,11 +136,13 @@ class Database
 
     $pdo->query("CREATE TABLE IF NOT EXISTS messages(
                id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
-               to_id INT NOT NULL,
-               from_id INT NOT NULL,
+               to_user_id INT NOT NULL,
+               from_user_id INT NOT NULL,
                message TEXT,
-               message_date DATETIME DEFAULT CURRENT_TIMESTAMP
-              );")or die(print_r($pdo->errorInfo(), true));
+               message_date DATETIME DEFAULT CURRENT_TIMESTAMP,
+    		       FOREIGN KEY(to_user_id) REFERENCES users(id),
+    			     FOREIGN KEY(from_user_id) REFERENCES users(id)
+    		      );")or die(print_r($pdo->errorInfo(), true));
 
     $pdo->query("CREATE TABLE IF NOT EXISTS blocking(
                id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,

@@ -23,13 +23,13 @@
             $sql->execute(array(':user' => $_GET['user']));
             $get_user = $sql->fetch();
             $sql_profile = $conn->prepare("SELECT gender, interests, age, toage,
-              sexual_preference, biography, agefrom,
-              fame, profile_picture FROM
+              sexual_pref, biography, agefrom,
+              fame, profile_pic FROM
               profile WHERE user_id=:id");
               $sql_profile->execute(array('id' => $get_user['id']));
               $profile = $sql_profile->fetch();
 
-              echo 'Profile picture: <br /><img src="' . $profile['profile_picture'] . '" width="400"> <br /><br />
+              echo 'Profile picture: <br /><img src="' . $profile['profile_pic'] . '" width="400"> <br /><br />
               Name: ' . $get_user['firstname'] . ' ' . $get_user['lastname'] . '<br />
               Gender: ' . $profile['gender'] . '<br />
               Interests: ' . $profile['interests'] . '<br />

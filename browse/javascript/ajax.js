@@ -15,29 +15,64 @@ function clear_filter()
   sessionStorage.removeItem('param');
 }
 
-function filter_list(data)
+function session_store(select_age_from, select_age_to)
 {
-  var age_opt_to = document.getElementById('upto');
-  var age_opt_from = document.getElementById('from');
-  var to_selected_age = age_opt_to.options[age_opt_to.selectedIndex].text;
-  var from_selected_age = age_opt_from.options[age_opt_from.selectedIndex].text;
-  var xhr = new XMLHttpRequest();
-  if (to_selected_age < from_selected_age)
-  {
-    document.getElementById('filter_error').style.display = "inline";
-    document.getElementById('filter_error').style.marginTop = "8%";
-    document.getElementById('error-label').innerHTML = "ERROR!";
-    return;
-  }
   if (sessionStorage.getItem('param') != null)
   {
     var param = sessionStorage.getItem('param');
   }
   else
   {
-    var param = "submit=post&min_age="+from_selected_age+"&max_age="+to_selected_age;
+    var param = "submit=post&min_age="+select_age_from+"&max_age="+select_age_to;
     sessionStorage.setItem('param', param);
   }
+}
+
+function filter_list(data)
+{
+  var age_opt_to = document.getElementById('upto');
+  var age_opt_from = document.getElementById('from');
+  var locale = document.getElementById('location').value;
+  var interest = document.getElementById('interest').value;
+  var select_age_to = age_opt_to.options[age_opt_to.selectedIndex].text;
+  var select_age_from = age_opt_from.options[age_opt_from.selectedIndex].text;
+  var xhr = new XMLHttpRequest();
+
+  if (!((locale == '') && (interest == '')))
+  {
+    check_ = 0;
+    console.log(check_+" one or more !empty");
+  }
+  else
+  {
+    check_ = 1;
+    console.log(check_+" both empty");
+  }
+  if (isNaN(select_age_to) && isNaN(select_age_from) && check_)
+  {
+    document.getElementById('filter_error').style.display = "inline";
+    document.getElementById('filter_error').style.marginTop = "8%";
+    document.getElementById('error-label').innerHTML = "NaN(age)! || empty filter";
+    return;
+  }
+  if ((isNaN(select_age_to) && !isNaN(select_age_from)) || (!isNaN(select_age_to) && isNaN(select_age_from)))
+  {
+    document.getElementById('filter_error').style.display = "inline";
+    document.getElementById('filter_error').style.marginTop = "8%";
+    document.getElementById('error-label').innerHTML = "one isNaN";
+    return;
+  }
+  if (!(isNaN(select_age_to) && isNaN(select_age_from)))
+  {
+    if (select_age_to < select_age_from)
+    {
+      document.getElementById('filter_error').style.display = "inline";
+      document.getElementById('filter_error').style.marginTop = "8%";
+      document.getElementById('error-label').innerHTML = "from < upto";
+      return;
+    }
+  }
+  param = session_store(select_age_from, select_age_to);
   xhr.open("POST", "handler/match.php", true);
   xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
   xhr.onreadystatechange = function()
