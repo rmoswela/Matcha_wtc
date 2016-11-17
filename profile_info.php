@@ -23,7 +23,7 @@
             $sql->execute(array(':user' => $_GET['user']));
             $get_user = $sql->fetch();
             $sql_profile = $conn->prepare("SELECT gender, interests, age, toage,
-              sexual_preference, biography, agefrom,
+              sexual_pref, biography, agefrom,
               fame, profile_picture FROM
               profile WHERE user_id=:id");
               $sql_profile->execute(array('id' => $get_user['id']));

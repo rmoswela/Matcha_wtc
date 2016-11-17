@@ -128,15 +128,6 @@ function loadSuggestions()
       {
         var k = 0;
         list = JSON.parse(xhr.responseText);
-        while (list.match[k])
-        {
-          if (sessionStorage.getItem('param'))
-          {
-            console.log(sessionStorage.getItem('param'));
-          }
-          console.log(list.match[k].age);
-          k++;
-        }
         while (i < 3) {
           var s_list = document.createElement('div');
           var user_link = document.createElement('a');

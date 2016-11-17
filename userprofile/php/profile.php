@@ -33,7 +33,7 @@
 		if (profileExists($_SESSION['user_id'], $conn) != 0)
 		{
 			try {
-				$sql = "INSERT INTO profile (`age`,`gender`,`sexual_preference`,`biography`,`interests`)"
+				$sql = "INSERT INTO profile (`age`,`gender`,`sexual_pref`,`biography`,`interests`)"
 				." VALUES ($userAge,'$userGender','$lookingFor','$biography','$userPreference')";
 				$conn->exec($sql);
 				echo $_SESSION['user_id']."Last Inset ".$conn->lastInsertId();
@@ -46,12 +46,12 @@
 
 			try {
 				$stmt = $conn->prepare("UPDATE profile "
-				."SET `age`=:age, `gender`=:gender, `sexual_preference`=:sexual_preference,"
+				."SET `age`=:age, `gender`=:gender, `sexual_pref`=:sexual_pref,"
 				." `biography`=:biography,`interests`=:interests WHERE `user_id`=1");
 
 				$stmt->bindParam(':age', $userAge);
 				$stmt->bindParam(':gender', $userGender);
-				$stmt->bindParam(':sexual_preference', $lookingFor);
+				$stmt->bindParam(':sexual_pref', $lookingFor);
 				$stmt->bindParam(':biography', $biography);
 				$stmt->bindParam(':interests', $userPreference);
 				$stmt->execute();

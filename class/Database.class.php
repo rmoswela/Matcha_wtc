@@ -99,7 +99,7 @@ class Database
                 age INT NOT NULL,
                 agefrom INT NOT NULL,
                 toage INT NOT NULL,
-                sexual_preference TEXT NOT NULL,
+                sexual_pref TEXT NOT NULL,
                 biography TEXT NOT NULL,
                 interests TEXT NOT NULL,
                 update_date DATETIME ,
