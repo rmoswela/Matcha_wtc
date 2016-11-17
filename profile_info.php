@@ -7,7 +7,7 @@
     <link rel="stylesheet" type="text/css" href="css/error.css">
     <link rel="stylesheet" type="text/css" href="css/profile.css">
   </head>
-  <body background="./mages/love-sand.jpg">
+  <body background="">
     <header>
       <span><a style="color:rgba(255,23,68 ,.9)" href="index.php">Vicini</a></span> Love
     </header>
@@ -16,7 +16,7 @@
         session_start();
         require_once("db_object.php");
         try {
-
+          if (isset($_GET))
           $conn = $start->server_connect();
           $sql = $conn->prepare("SELECT id, firstname, lastname, online, last_seen
             FROM users WHERE username=:user");
@@ -24,12 +24,16 @@
             $get_user = $sql->fetch();
             $sql_profile = $conn->prepare("SELECT gender, interests, age, toage,
               sexual_pref, biography, agefrom,
+<<<<<<< HEAD
               fame, profile_picture FROM
+=======
+              fame, profile_pic FROM
+>>>>>>> b8e10f284eb3e71875b6c5862f9ea718bc4f758c
               profile WHERE user_id=:id");
               $sql_profile->execute(array('id' => $get_user['id']));
               $profile = $sql_profile->fetch();
 
-              echo 'Profile picture: <br /><img src="' . $profile['profile_picture'] . '" width="400"> <br /><br />
+              echo 'Profile picture: <br /><img src="' . $profile['profile_pic'] . '" width="400"> <br /><br />
               Name: ' . $get_user['firstname'] . ' ' . $get_user['lastname'] . '<br />
               Gender: ' . $profile['gender'] . '<br />
               Interests: ' . $profile['interests'] . '<br />

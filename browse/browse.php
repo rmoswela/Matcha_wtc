@@ -52,11 +52,11 @@
           </tr>
           <tr>
             <td>interests:</td>
-            <td><input type="text" name="interest" value="" placeholder="interests ex: #gothic"></td>
+            <td><input id="interest" type="text" value="" name="interest" value="" placeholder="interests ex: #gothic"></td>
           </tr>
           <tr>
             <td>Location:</td>
-            <td><input type="text" name="interest" value="" placeholder="city or town"></td>
+            <td><input id="location" type="text" value="" name="locale" placeholder="city or town"></td>
           </tr>
           <tr>
             <td>

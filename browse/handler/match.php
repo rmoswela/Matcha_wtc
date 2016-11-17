@@ -11,16 +11,18 @@ if (isset($_SESSION['username']))
     {
       $min = 0;
       $max = 100;
+      $location = null;
     }
     else
     {
       $min = htmlspecialchars(trim($_POST['min_age']));
       $max = htmlspecialchars(trim($_POST['max_age']));
+      $location = htmlspecialchars(trim($_POST['location']));
     }
-    //print ($min." and " .$max);
+    //print ("location: ". $_POST['location']);
     $matcha = new Matcha($start);
     $suggested = $matcha->suggest();
-    $best_match = $matcha->best_match($min, $max);
+    $best_match = $matcha->best_match($min, $max, $location);
     $data = json_encode(array('suggest' => $suggested, 'match' => $best_match));
     print ($data);
   }

@@ -62,6 +62,7 @@ class Database
 
   function create_schema($pdo)
   {
+<<<<<<< HEAD
     $pdo->query("CREATE DATABASE IF NOT EXISTS db_vicinity;")
     or die(print_r($pdo->errorInfo(), true));
 
@@ -90,8 +91,75 @@ class Database
                 upload_date DATETIME DEFAULT CURRENT_TIMESTAMP,
                 url TEXT NOT NULL
                );")or die(print_r($pdo->errorInfo(), true));
+=======
+    $sql  = "CREATE DATABASE IF NOT EXISTS db_vicinity;USE db_vicinity;";
+    if ($conn->query($sql))
+    {
+      $this->report = "Database created successfully<br>";
+      print $this->__getReport();
+    }
+    else
+    {
+      $this->report = "couldn't create DATABASE<br>";
+      print $this->__getReport();
+      return;
+    }
+    $sql  = "CREATE TABLE IF NOT EXISTS users(
+	        `user_id`	 INT(8) PRIMARY KEY AUTO_INCREMENT NOT NULL,
+          `active` INT(1) NOT NULL DEFAULT 0,
+          `signed-in` INT(1) NOT NULL DEFAULT 0,
+	        `firstname` VARCHAR(255) NOT NULL,
+	        `lastname`  VARCHAR(255) NOT NULL,
+	        `username` 	 VARCHAR(80),
+	        `email` VARCHAR(80) NOT NULL,
+	        `password` VARCHAR(255) NOT NULL,
+          `gender` VARCHAR(25),
+          `interests` VARCHAR(255),
+          `sex-preference` VARCHAR(80),
+          `biography` TEXT)";
+
+
+    $profile_sql  = "CREATE TABLE IF NOT EXISTS users(
+	        `user_id`	 INT(8) PRIMARY KEY AUTO_INCREMENT NOT NULL,
+          `gender` VARCHAR(25),
+          `interests` VARCHAR(255),
+          `sex-preference` VARCHAR(80),
+          `biography` TEXT)";
+
+    try
+    {
+      if ($conn->query($sql))
+      {
+        $this->report = "Users table created successfully<br>";
+        print $this->__getReport();
+      }
+      else
+      {
+        $this->report = "couldn't create table<br>";
+        print $this->__getReport();
+      }
+
+      //Create table for profile
+      if ($conn->query($profile_sql))
+      {
+        $this->report = "Users table created successfully<br>";
+        print $this->__getReport();
+      }
+      else
+      {
+        $this->report = "couldn't create table<br>";
+        print $this->__getReport();
+      }
+    }
+    catch(PDOException $error)
+    {
+      $this->report = $error->getMessage();
+      print $this->__getReport();
+    }
+>>>>>>> origin/mohale
 
     $pdo->query("CREATE TABLE IF NOT EXISTS profile(
+<<<<<<< HEAD
                 id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
                 user_id INT NOT NULL,
                 profile_picture TEXT NOT NULL,
@@ -107,6 +175,25 @@ class Database
                 likes INT NOT NULL,
                 location TEXT
                );")or die(print_r($pdo->errorInfo(), true));
+=======
+            id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
+            user_id INT NOT NULL,
+            profile_pic TEXT NOT NULL,
+            gender VARCHAR(20) NOT NULL,
+            age INT NOT NULL,
+            agefrom INT NOT NULL,
+            toage INT NOT NULL,
+            sexual_pref TEXT NOT NULL,
+            biography TEXT NOT NULL,
+            interests TEXT NOT NULL,
+            update_date DATETIME ,
+            fame INT NOT NULL,
+         	  notif INT NOT NULL,
+         	  views INT NOT NULL,
+            likes INT NOT NULL,
+         		location TEXT
+            );")or die(print_r($pdo->errorInfo(), true));
+>>>>>>> b8e10f284eb3e71875b6c5862f9ea718bc4f758c
 
     $pdo->query("CREATE TABLE IF NOT EXISTS likes(
                 id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
@@ -134,11 +221,13 @@ class Database
 
     $pdo->query("CREATE TABLE IF NOT EXISTS messages(
                id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
-               to_id INT NOT NULL,
-               from_id INT NOT NULL,
+               to_user_id INT NOT NULL,
+               from_user_id INT NOT NULL,
                message TEXT,
-               message_date DATETIME DEFAULT CURRENT_TIMESTAMP
-              );")or die(print_r($pdo->errorInfo(), true));
+               message_date DATETIME DEFAULT CURRENT_TIMESTAMP,
+    		       FOREIGN KEY(to_user_id) REFERENCES users(id),
+    			     FOREIGN KEY(from_user_id) REFERENCES users(id)
+    		      );")or die(print_r($pdo->errorInfo(), true));
 
     $pdo->query("CREATE TABLE IF NOT EXISTS blocking(
                id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
